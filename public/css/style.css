@@ -1,0 +1,144 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: serif;
+  box-sizing: border-box;
+  vertical-align: baseline;
+}
+
+/* ヘッダー */
+header {
+  width: 100%;
+}
+
+.Top-wrapper {
+  width: 100%;
+  height: auto;
+  background-color: transparent;
+  text-align: left;
+  position: absolute;
+  top: 20px;
+  position: fixed;
+  z-index: 999;
+  display: flex;
+  justify-content: space-around;
+}
+
+
+.title {
+  cursor: pointer;
+  padding-left: 5px;
+}
+
+
+.title .hover{
+  display: none;
+  }
+  
+/* ホバー時は通常時の文字を非表示にする */
+.title:hover .nomal{
+display: none;
+}
+
+/* ホバー時に、ホバー時の文字を表示する */
+.title:hover .hover{
+display: inline;
+}
+
+.icon {
+  width: 100px;
+  height: 46px;
+  cursor: pointer;
+  z-index: 99;
+}
+
+.icon a{
+  color: white;
+}
+
+.Top-wrapper .icon img {
+  width: 30px;
+  height: 30px;
+  margin: 8px;
+}
+
+.Top-wrapper .icon img:hover{
+  opacity: 0.5;
+}
+/* 写真 */
+.section {
+  width: 100%;
+  text-align: center;
+  position: relative;
+  margin-bottom: 50px;
+}
+
+.section img {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  top: 46%;
+  left: 50%;
+  -webkit-transform : translate(-50%,-50%);
+  transform : translate(-50%,-50%);
+}
+
+@media screen and (min-width: 400px) {
+/* ヘッダー */
+ header {
+    height: 50px;
+}
+
+/* 写真 */
+.section img {
+  top: 50%;
+  width: 100%;
+  height: auto;
+  padding: 0;
+}
+
+@media screen and (min-width: 500px) {
+  /* ヘッダー */
+   header {
+      height: 50px;
+  }
+  
+  /* 写真 */
+  .section img {
+    width: 500px;
+  }
+
+}
+
+@media screen and (min-width: 700px) {
+
+/* ヘッダー */
+  .Top-wrapper {
+    font-size: 120%;
+  }
+
+  .Top-wrapper .title {
+    position: absolute;
+    left: 50%;
+    -webkit-transform : translate(-50%);
+    transform : translate(-50%);
+  }
+
+
+  .icon {
+    position: absolute;
+    width: 120px;
+    left:80%;
+  }
+
+  .Top-wrapper .icon img {
+    width: 36px;
+    height: 36px;
+    margin: 10px;
+  }
+
+/* 写真 */
+  .section img {
+    top: 50%;
+  }
+}
