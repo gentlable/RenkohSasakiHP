@@ -7,19 +7,24 @@ use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Grid;
 use Illuminate\Http\Request;
 
+// 写真編集画面
 class ImageController extends AdminController
 {
     protected $title = 'Image';
 
+    // 新規画像登録画面へ
     public function register()
     {
         return view('admin.image.register');
     }
 
+    // 新規画像登録
     public function doRegister(Request $request)
     {
+        // ファイルが空の時
         if ($request->file('image') === null) {
             $validator_arr['file_exit'] = null;
+        // 
         } else {
             $validator_arr['file_exit'] = 'exit';
             $file_name = $request->file('image')->getClientOriginalName();
@@ -39,6 +44,7 @@ class ImageController extends AdminController
         return redirect()->route('detail', ['id' => $id]);
     }
 
+    // 詳細ボタン押下
     public function detail(Request $request)
     {
         $image = Image::find($request->id);
@@ -51,6 +57,7 @@ class ImageController extends AdminController
         ]);
     }
 
+    // 編集ボタン押下
     public function redact(Request $request)
     {
         $image = Image::find($request->id);
@@ -63,6 +70,7 @@ class ImageController extends AdminController
         ]);
     }
 
+    // 編集確定
     public function doRedact(Request $request)
     {
         $image = Image::find($request->id);
@@ -72,6 +80,7 @@ class ImageController extends AdminController
         return redirect()->route('list');
     }
 
+    // 削除ボタン押下
     public function doDelete(Request $request)
     {
         $image = Image::find($request->id);
@@ -79,10 +88,10 @@ class ImageController extends AdminController
         $image->deleteImageDataFromServer($file_path);
         $image->deleteImageDataFromDB();
 
-
-        return redirect()->route('list');
+       return redirect()->route('list');
     }
 
+    // Image画面作ってる
     protected function grid()
     {
         $grid = new Grid(new Image());
