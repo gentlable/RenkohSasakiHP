@@ -7,11 +7,14 @@ use App\Mail\Contact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
+// ページ表示用コントローラー
 class RenkohSasakiController extends Controller
 {
+    // トップページ
     public function index()
-    {
-
+    {   
+        \Log::info(Image::where('position', 1)->where('web_display', 1));
+        // 表示用画像配列作成 
         for ($i = 1; $i <= 20; $i++) {
             if (Image::where('position', $i)->where('web_display', 1)->exists()) {
                 $image = Image::where('web_display', 1)->where('position', $i)->inRandomOrder()->first();
@@ -25,11 +28,16 @@ class RenkohSasakiController extends Controller
                 continue;
             }
         }
+        \Log::info($web_images);
+        // 一段目の画像をセット
         $first_web_image = $web_images[0];
+        // 一段目の画像を配列から削除
         unset($web_images[0]);
+        \Log::info($web_images);
+        // 一段目の画像を配列から削除
         $web_images = array_values($web_images);
 
-
+        // ポップアップ用画像配列作成
         for ($i = 1; $i <= 20; $i++) {
             if (Image::where('position', $i)->where('list_display', 1)->exists() === false &&
                 Image::where('position', $i)->where('list_display', 2)->exists() === false) {
@@ -58,7 +66,9 @@ class RenkohSasakiController extends Controller
             $modal_images[] = $file_paths_for_list;
         }
 
+        // 一段目のポップアップ画像をセット
         $first_modal_images = $modal_images[0];
+        // 一段目のポップアップ画像を配列から削除
         unset($modal_images[0]);
 
         $top_first_modal_image= $first_modal_images[0];
@@ -83,6 +93,7 @@ class RenkohSasakiController extends Controller
             ]);
     }
 
+    // contact
     public function contact(Request $request)
     {
         $params = [];
@@ -106,24 +117,38 @@ class RenkohSasakiController extends Controller
         return redirect()->route('index');
     }
 
+    // テストページ
     public function test()
     {
 
+        // for ($i = 1; $i <= 20; $i++) {
+        //     if (Image::where('position', $i)->where('web_display', 1)->exists()) {
+        //         $image = Image::where('web_display', 1)->where('position', $i)->inRandomOrder()->first();
+        //         $file_name = $image['file_name'];
+        //         $web_images[] = "/images/$file_name";
+        //     } elseif (Image::where('position', $i)->where('web_display', 2)->exists()) {
+        //         $image = Image::where('web_display', 2)->where('position', $i)->inRandomOrder()->first();
+        //         $file_name = $image['file_name'];
+        //         $web_images[] = "/images/$file_name";
+        //     } else {
+        //         continue;
+        //     }
+        // }
         for ($i = 1; $i <= 20; $i++) {
             if (Image::where('position', $i)->where('web_display', 1)->exists()) {
-                $image = Image::where('web_display', 1)->where('position', $i)->inRandomOrder()->first();
+                $image = Image::where('web_display', 1)->where('position', $i)->first();
                 $file_name = $image['file_name'];
                 $web_images[] = "/images/$file_name";
             } elseif (Image::where('position', $i)->where('web_display', 2)->exists()) {
-                $image = Image::where('web_display', 2)->where('position', $i)->inRandomOrder()->first();
+                $image = Image::where('web_display', 2)->where('position', $i)->first();
                 $file_name = $image['file_name'];
                 $web_images[] = "/images/$file_name";
             } else {
                 continue;
             }
         }
-        $first_web_image = $web_images[0];
-        unset($web_images[0]);
+        // $first_web_image = $web_images[0];
+        // unset($web_images[0]);
         $web_images = array_values($web_images);
 
 

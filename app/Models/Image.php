@@ -18,11 +18,16 @@ class Image extends Model
       'list_display',
     ];
 
+    // 画像登録
     public function registerImageData($file_name, $param)
     {
+        // ファイル名
         $this->file_name     = $file_name;
+        // web表示
         $this->web_display   = $param['web_display'];
+        // 一覧表示
         $this->list_display  = $param['list_display'];
+        // ポジション
         $this->position      = $param['position'];
         $this->save();
 
@@ -48,6 +53,8 @@ class Image extends Model
         $this->destroy($this->id);
     }
 
+    // バリデーションを行う。
+    // $validator_arrの各要素がfalseの時、各要素はエラーを返す。
     public static function validator(array $validator_arr)
     {
         $validator = Validator::make($validator_arr, [

@@ -24,20 +24,25 @@ class ImageController extends AdminController
         // ファイルが空の時
         if ($request->file('image') === null) {
             $validator_arr['file_exist'] = null;
-        // 
+        // ファイルが選択されているとき
         } else {
-            // file_exist?
+            // バリデータ配列に値をセット
             $validator_arr['file_exist'] = 'exist';
             $file_name = $request->file('image')->getClientOriginalName();
             $validator_arr['file_name'] = $file_name;
             $pathinfo = pathinfo($file_name);
             $validator_arr['extension'] = $pathinfo['extension'];
         }
+
+        // バリデーション
         $validator = Image::validator($validator_arr);
         if ($validator->fails()) {
             return back()->withInput()->withErrors($validator);
         }
+        // ファイルを保存
         $request->file('image')->storeAs('images', $file_name);
+
+        // 保存したファイルをpublicへ移動
         \File::move(storage_path("app/images/$file_name"), public_path("/images/$file_name"));
         $image = new Image;
         $id = $image->registerImageData($file_name, $request->except(['image']));

@@ -1,6 +1,7 @@
 @extends('test.test_app')
 @section('title', 'TestPage')
 @section('content')
+<!-- メイン -->
 <main>
     <div class="section">
         <div id="carousel_1" class="carousel slide carousel-fade">
