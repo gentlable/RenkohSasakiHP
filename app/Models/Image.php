@@ -52,7 +52,7 @@ class Image extends Model
     {
         $validator = Validator::make($validator_arr, [
           'file_name'  => 'unique:images,file_name',
-          'file_exit'  => 'required',
+          'file_exist'  => 'required',
           'extension'  => 'starts_with:jpg',
         ]);
 

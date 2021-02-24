@@ -23,10 +23,11 @@ class ImageController extends AdminController
     {
         // ファイルが空の時
         if ($request->file('image') === null) {
-            $validator_arr['file_exit'] = null;
+            $validator_arr['file_exist'] = null;
         // 
         } else {
-            $validator_arr['file_exit'] = 'exit';
+            // file_exist?
+            $validator_arr['file_exist'] = 'exist';
             $file_name = $request->file('image')->getClientOriginalName();
             $validator_arr['file_name'] = $file_name;
             $pathinfo = pathinfo($file_name);

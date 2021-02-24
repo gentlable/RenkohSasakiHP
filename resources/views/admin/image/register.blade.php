@@ -49,7 +49,7 @@
                                 <input type="file" class="custom-file-input" name="image">
                             </div>
                         </div>
-                        @if($errors->has('file_exit'))
+                        @if($errors->has('file_exist'))
                         <div class="form-group">
                         <label class="col-sm-2 control-label"></label>
                         <div class="col-sm-5">
@@ -59,7 +59,7 @@
                         <div class="form-group">
                         <label class="col-sm-2 control-label"></label>
                         <div class="col-sm-5">
-                        <label class="control-label" style="color:red;" for="inputError">jipファイルを選択してください。</label><br>
+                        <label class="control-label" style="color:red;" for="inputError">jpgファイルを選択してください。</label><br>
                         </div>
                         @elseif($errors->has('file_name'))
                         <div class="form-group">
