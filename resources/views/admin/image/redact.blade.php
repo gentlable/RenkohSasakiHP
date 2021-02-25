@@ -17,16 +17,13 @@
                         <label class="col-sm-2 control-label">Web表示</span></label>
                         <div class="col-sm-9">
                             <select class="form-control" name="web_display">
-                                @if($image->web_display === 1)
-                                <option value="{{ $image->web_display }}" selected>変更前 : 優先</option>
-                                @elseif($image->web_display === 2)
+                                @if($image->web_display === 2)
                                 <option value="{{ $image->web_display }}" selected>変更前 : 可</option>
                                 @else
                                 <option value="{{ $image->web_display }}" selected>変更前 : 不可</option>
                                 @endif
-                                <option value='1'>優先</option>
                                 <option value='2'>可</option>
-                                <option value='3'>不可</option>
+                                <option value='0'>不可</option>
                             </select>
                         </div>
                     </div>
@@ -34,16 +31,13 @@
                         <label class="col-sm-2 control-label">一覧表示</span></label>
                         <div class="col-sm-9">
                             <select class="form-control" name="list_display">
-                                @if($image->list_display === 1)
-                                <option value="{{ $image->list_display }}" selected>変更前 : 優先</option>
-                                @elseif($image->list_display === 2)
+                                @if($image->list_display === 2)
                                 <option value="{{ $image->list_display }}" selected>変更前 : 可</option>
                                 @else
                                 <option value="{{ $image->list_display }}" selected>変更前 : 不可</option>
                                 @endif
-                                <option value='1'>優先</option>
                                 <option value='2'>可</option>
-                                <option value='3'>不可</option>
+                                <option value='0'>不可</option>
                             </select>
                         </div>
                     </div>

@@ -16,9 +16,8 @@
                             <label class="col-sm-2 control-label">Web表示</label>
                             <div class="col-sm-5">
                             <select class="form-control" name="web_display">
-                                <option value='1'>優先</option>
                                 <option value='2'>可</option>
-                                <option value='3'>不可</option>
+                                <option value='0'>不可</option>
                             </select>
                             </div>
                         </div>
@@ -26,9 +25,8 @@
                             <label class="col-sm-2 control-label">一覧表示</label>
                             <div class="col-sm-5">
                             <select class="form-control" name="list_display">
-                                <option value='1'>優先</option>
                                 <option value='2'>可</option>
-                                <option value='3'>不可</option>
+                                <option value='0'>不可</option>
                             </select>
                             </div>
                         </div>
