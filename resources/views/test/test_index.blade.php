@@ -3,52 +3,29 @@
 @section('content')
 <!-- メイン -->
 <main>
+    @foreach($modal_images as $i => $modal_image)
     <div class="section">
-        <div id="carousel_1" class="carousel slide carousel-fade">
+        <div id="carouselExampleFade_{{ $i }}" class="carousel slide carousel-fade" data-interval="false">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="{{ asset($top_first_modal_image) }}">
+                    <img src="{{ asset($modal_image[0]) }}">
                 </div>
-                @foreach($first_modal_images as $first_modal_image)
+                @if (count($modal_images[$i]) > 2)
+                @for($j = 1; $j <= count($modal_images[$i]) - 1; $j++)
                 <div class="carousel-item">
-                    <img src="{{ asset($first_modal_image) }}">
+                    <img src="{{ asset($modal_image[$j]) }}">
                 </div>
-                @endforeach
+                @endfor
+                @endif
             </div>
-            @if (count($first_modal_images) !== 0)
-            <a class="carousel-control-prev" href="#carousel_1" role="button" data-slide="prev">
-            </a>
-            <a class="carousel-control-next" href="#carousel_1" role="button" data-slide="next">
-            </a>
-            <ol class="carousel-indicators">
-                <li data-target="#carousel_1" data-slide-to="0" class="active"></li>
-                <li data-target="#carousel_1" data-slide-to="1"></li>
-                <li data-target="#carousel_1" data-slide-to="2"></li>
-            </ol>
-            @endif
-        </div>
-    </div>
-    @foreach($web_images as $i => $web_image)
-    <div class="section">
-        <div id="carouselExampleFade_{{ $i }}" class="carousel slide carousel-fade" data-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="{{ asset($web_image) }}">
-                </div>
-                @foreach($modal_images[$i] as $modal_image)
-                <div class="carousel-item">
-                    <img src="{{ asset($modal_image) }}">
-                </div>
-                @endforeach
-            </div>
-            @if (count($modal_images[$i]) !== 0)
+            @if (count($modal_images[$i]) > 2)
             <a class="carousel-control-prev" href="#carouselExampleFade_{{ $i }}" role="button" data-slide="prev">
             </a>
             <a class="carousel-control-next" href="#carouselExampleFade_{{ $i }}" role="button" data-slide="next">
             </a>
             <ol class="carousel-indicators">
                 <li data-target="#carouselExampleFade_{{ $i }}" data-slide-to="0" class="active"></li>
-                @for ($j = 1; $j <= count($modal_images[$i]); $j++)
+                @for ($j = 1; $j <= count($modal_images[$i]) - 1; $j++)
                 <li data-target="#carouselExampleFade_{{ $i }}" data-slide-to="{{ $j }}"></li>
                 @endfor
             </ol>
@@ -76,7 +53,7 @@
 }
 .carousel-item img {
     max-height: 80vh;
-    max-width: 90vw;
+    max-width: 100%;
     object-fit: cover;
 }
 .carousel-indicators {
