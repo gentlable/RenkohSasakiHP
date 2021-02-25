@@ -107,6 +107,7 @@ class ImageController extends AdminController
             $tools->prepend("<a href='{$route}' class='btn btn-sm btn-success'>新規画像登録</a>");
         });
 
+        // ここどうなってんねん
         $grid->filter(function ($filter) {
             $filter->disableIdFilter();
             $filter->like('file_name', 'ファイル名');
@@ -135,15 +136,13 @@ class ImageController extends AdminController
             ]);
             $filter->like('web_display', 'Web表示')
             ->select([
-                '1' => '優先',
                 '2' => '可',
-                '3' => '不可',
+                '0' => '不可',
             ]);
             $filter->like('list_display', '一覧表示')
             ->select([
-                '1' => '優先',
                 '2' => '可',
-                '3' => '不可',
+                '0' => '不可',
             ]);
         });
         
@@ -152,23 +151,19 @@ class ImageController extends AdminController
         $grid->column('position', 'ポジション')->sortable();
         $grid->column('web_display', 'Web表示')
             ->display(function ($web_display) {
-                if ($web_display === 1) {
-                    $web_display = '優先';
+                if ($web_display === 0 || $web_display === 3) {
+                    $web_display = '不可';
                 } elseif ($web_display === 2) {
                     $web_display = '可';
-                } else {
-                    $web_display = '不可';
-                }
+                } 
                 return $web_display;
             })->sortable();
         $grid->column('list_display', '一覧表示')
             ->display(function ($list_display) {
-                if ($list_display === 1) {
-                    $list_display = '優先';
+                if ($list_display === 0|| $list_display === 3) {
+                    $list_display = '不可';
                 } elseif ($list_display === 2) {
                     $list_display = '可';
-                } else {
-                    $list_display = '不可';
                 }
                 return $list_display;
             })->sortable();
