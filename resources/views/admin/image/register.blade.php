@@ -13,19 +13,10 @@
                             <h2 class="panel-title">新規画像情報入力</h2>
                         </div>
                         <div class="form-group" style="margin-top:20px">
-                            <label class="col-sm-2 control-label">Web表示</label>
+                            <label class="col-sm-2 control-label">表示可否</label>
                             <div class="col-sm-5">
-                            <select class="form-control" name="web_display">
-                                <option value='2'>可</option>
-                                <option value='0'>不可</option>
-                            </select>
-                            </div>
-                        </div>
-                        <div class="form-group" style="margin-top:20px">
-                            <label class="col-sm-2 control-label">一覧表示</label>
-                            <div class="col-sm-5">
-                            <select class="form-control" name="list_display">
-                                <option value='2'>可</option>
+                            <select class="form-control" name="display">
+                                <option value='1'>可</option>
                                 <option value='0'>不可</option>
                             </select>
                             </div>

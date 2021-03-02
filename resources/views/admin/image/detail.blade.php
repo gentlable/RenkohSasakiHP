@@ -18,7 +18,7 @@
                         {{ $image->position }}
                         <hr>
                         <label class="col-sm-3 control-label">表示可否</span></label>
-                        @if($image->list_display === 2)
+                        @if($image->display === 1)
                         可
                         @else
                         不可

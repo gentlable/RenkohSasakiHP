@@ -19,8 +19,8 @@ class RenkohSasakiController extends Controller
             // 各段の画像の配列（ストーリー）
             $file_paths_for_list = [];
             // 一覧表示可のものを格納
-            if (Image::where('position', $i)->where('list_display', 2)->exists()) {
-                $images = Image::where('position', $i)->where('list_display', 2)->orderBy('file_name', 'asc')->get();
+            if (Image::where('position', $i)->where('display', 1)->exists()) {
+                $images = Image::where('position', $i)->where('display', 1)->orderBy('file_name', 'asc')->get();
                 foreach ($images as $image) {
                     $file_name = $image['file_name'];
                     $file_path_for_list = "/images/$file_name";
@@ -70,8 +70,8 @@ class RenkohSasakiController extends Controller
             // 各段の画像の配列（ストーリー）
             $file_paths_for_list = [];
             // 一覧表示可のものを格納
-            if (Image::where('position', $i)->where('list_display', 2)->exists()) {
-                $images = Image::where('position', $i)->where('list_display', 2)->orderBy('file_name', 'asc')->get();
+            if (Image::where('position', $i)->where('display', 1)->exists()) {
+                $images = Image::where('position', $i)->where('display', 1)->orderBy('file_name', 'asc')->get();
                 foreach ($images as $image) {
                     $file_name = $image['file_name'];
                     $file_path_for_list = "/images/$file_name";

@@ -101,7 +101,7 @@ class ImageController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new Image());
-
+        
         $route = route('register');
         $grid->tools(function ($tools) use ($route) {
             $tools->prepend("<a href='{$route}' class='btn btn-sm btn-success'>新規画像登録</a>");
@@ -116,9 +116,9 @@ class ImageController extends AdminController
             $filter->like('file_name', 'ファイル名');
             $filter->like('position', 'ポジション')
             ->select($array);
-            $filter->like('list_display', '表示可否')
+            $filter->like('display', '表示可否')
             ->select([
-                '2' => '可',
+                '1' => '可',
                 '0' => '不可',
             ]);
         });
@@ -126,19 +126,23 @@ class ImageController extends AdminController
         $grid->column('id', 'ID')->sortable();
         $grid->column('file_name', 'ファイル名')->sortable();
         $grid->column('position', 'ポジション')->sortable();
-        $grid->column('list_display', '表示可否')
-            ->display(function ($list_display) {
-                if ($list_display === 0) {
-                    $list_display = '不可';
-                } elseif ($list_display === 2) {
-                    $list_display = '可';
+        $grid->column('display', '表示可否')
+            ->display(function ($display) {
+                if ($display === 0) {
+                    $display = '不可';
+                } elseif ($display === 1) {
+                    $display = '可';
                 }
-                return $list_display;
+                return $display;
             })->sortable();
         $grid->disableActions();
         $grid->disableCreateButton();
         $grid->expandFilter();
-
+        
+        // ページ表示数
+        $grid->paginate(50);
+        // 初期ソート
+        $grid->model()->orderBy('position', 'asc')->orderBy('file_name', 'asc');
 
         $grid->column('詳細')->display(function () {
             return '<a class="btn btn-primary"

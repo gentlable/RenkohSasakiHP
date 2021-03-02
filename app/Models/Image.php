@@ -14,8 +14,7 @@ class Image extends Model
     protected $fillable = [
       'file_name',
       'position',
-      'web_display',
-      'list_display',
+      'display',
     ];
 
     // 画像登録
@@ -23,10 +22,8 @@ class Image extends Model
     {
         // ファイル名
         $this->file_name     = $file_name;
-        // web表示
-        $this->web_display   = $param['web_display'];
         // 一覧表示
-        $this->list_display  = $param['list_display'];
+        $this->display  = $param['display'];
         // ポジション
         $this->position      = $param['position'];
         $this->save();
@@ -36,8 +33,7 @@ class Image extends Model
 
     public function redactImageData($param)
     {
-        $this->web_display  = $param['web_display'];
-        $this->list_display = $param['list_display'];
+        $this->display = $param['display'];
         $this->position     = $param['position'];
 
         $this->save();

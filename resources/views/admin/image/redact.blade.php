@@ -16,13 +16,13 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">表示可否</span></label>
                         <div class="col-sm-9">
-                            <select class="form-control" name="list_display">
-                                @if($image->list_display === 2)
-                                <option value="{{ $image->list_display }}" selected>変更前 : 可</option>
+                            <select class="form-control" name="display">
+                                @if($image->display === 1)
+                                <option value="{{ $image->display }}" selected>変更前 : 可</option>
                                 @else
-                                <option value="{{ $image->list_display }}" selected>変更前 : 不可</option>
+                                <option value="{{ $image->display }}" selected>変更前 : 不可</option>
                                 @endif
-                                <option value='2'>可</option>
+                                <option value='1'>可</option>
                                 <option value='0'>不可</option>
                             </select>
                         </div>
