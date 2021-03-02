@@ -35,7 +35,7 @@
                             <label class="col-sm-2 control-label">ポジション</label>
                             <div class="col-sm-5">
                             <select class="form-control" name="position">
-                            @for ($i = 1; $i < 21; $i++)
+                            @for ($i = 1; $i <= config('const.position'); $i++)
                             <option value="{{ $i }}">{{ $i }}</option>
                             @endfor
                             </select>

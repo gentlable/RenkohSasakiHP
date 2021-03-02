@@ -13,6 +13,7 @@ class RenkohSasakiController extends Controller
     // トップページ
     public function index()
     {
+        $modal_images = [];
         for ($i = 1; $i <= 20; $i++) {
 
             // 各段の画像の配列（ストーリー）
@@ -30,8 +31,6 @@ class RenkohSasakiController extends Controller
             }
             $modal_images[] = $file_paths_for_list;
         }
-
-        $modal_images = array_values($modal_images);
 
         return view("renkohsasaki.index", [
             'modal_images' => $modal_images,
@@ -67,6 +66,7 @@ class RenkohSasakiController extends Controller
     {
         for ($i = 1; $i <= 20; $i++) {
 
+            $modal_images = [];
             // 各段の画像の配列（ストーリー）
             $file_paths_for_list = [];
             // 一覧表示可のものを格納

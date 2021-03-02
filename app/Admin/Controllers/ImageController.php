@@ -107,39 +107,16 @@ class ImageController extends AdminController
             $tools->prepend("<a href='{$route}' class='btn btn-sm btn-success'>新規画像登録</a>");
         });
 
-        // ここどうなってんねん
         $grid->filter(function ($filter) {
+            $array = [];
+            for($i = 1; $i <= config('const.position'); $i++) {
+                $array[] = $i; 
+            }
             $filter->disableIdFilter();
             $filter->like('file_name', 'ファイル名');
             $filter->like('position', 'ポジション')
-            ->select([
-                '1' => '1',
-                '2' => '2',
-                '3' => '3',
-                '4' => '4',
-                '5' => '5',
-                '6' => '6',
-                '7' => '7',
-                '8' => '8',
-                '9' => '9',
-                '10' => '10',
-                '11' => '11',
-                '12' => '12',
-                '13' => '13',
-                '14' => '14',
-                '15' => '15',
-                '16' => '16',
-                '17' => '17',
-                '18' => '18',
-                '19' => '19',
-                '20' => '20',
-            ]);
-            $filter->like('web_display', 'Web表示')
-            ->select([
-                '2' => '可',
-                '0' => '不可',
-            ]);
-            $filter->like('list_display', '一覧表示')
+            ->select($array);
+            $filter->like('list_display', '表示可否')
             ->select([
                 '2' => '可',
                 '0' => '不可',
@@ -149,18 +126,9 @@ class ImageController extends AdminController
         $grid->column('id', 'ID')->sortable();
         $grid->column('file_name', 'ファイル名')->sortable();
         $grid->column('position', 'ポジション')->sortable();
-        $grid->column('web_display', 'Web表示')
-            ->display(function ($web_display) {
-                if ($web_display === 0 || $web_display === 3) {
-                    $web_display = '不可';
-                } elseif ($web_display === 2) {
-                    $web_display = '可';
-                } 
-                return $web_display;
-            })->sortable();
-        $grid->column('list_display', '一覧表示')
+        $grid->column('list_display', '表示可否')
             ->display(function ($list_display) {
-                if ($list_display === 0|| $list_display === 3) {
+                if ($list_display === 0) {
                     $list_display = '不可';
                 } elseif ($list_display === 2) {
                     $list_display = '可';

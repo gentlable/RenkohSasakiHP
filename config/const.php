@@ -2,5 +2,5 @@
 
 return [
     // ポジション数
-    'position' => 20,
+    'position' => 25,
 ];

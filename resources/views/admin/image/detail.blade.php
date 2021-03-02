@@ -17,14 +17,7 @@
                         <label class="col-sm-3 control-label">ポジション</span></label>
                         {{ $image->position }}
                         <hr>
-                        <label class="col-sm-3 control-label">Web表示</span></label>
-                        @if($image->web_display === 2)
-                        可
-                        @else
-                        不可
-                        @endif
-                        <hr>
-                        <label class="col-sm-3 control-label">一覧表示</span></label>
+                        <label class="col-sm-3 control-label">表示可否</span></label>
                         @if($image->list_display === 2)
                         可
                         @else
