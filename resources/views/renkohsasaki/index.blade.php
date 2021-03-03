@@ -110,14 +110,18 @@
 
 <style>
 .section {
-    max-height: 100vh;
+  max-height: 100vh;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .carousel {
     margin: auto;
-    margin-top: 10vh;
-    margin-bottom: 15vh;
-    /* 0.79 縦横の比率 */
-    max-width: calc(80vh * 0.79);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 .carousel a {
     width: 50%;
