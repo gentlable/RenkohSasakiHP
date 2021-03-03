@@ -14,7 +14,7 @@ class RenkohSasakiController extends Controller
     public function index()
     {
         $modal_images = [];
-        for ($i = 1; $i <= 20; $i++) {
+        for ($i = 1; $i <= config('const.position'); $i++) {
 
             // 各段の画像の配列（ストーリー）
             $file_paths_for_list = [];
@@ -64,7 +64,7 @@ class RenkohSasakiController extends Controller
     // テストページ
     public function test()
     {
-        for ($i = 1; $i <= 20; $i++) {
+        for ($i = 1; $i <= config('const.position'); $i++) {
 
             $modal_images = [];
             // 各段の画像の配列（ストーリー）

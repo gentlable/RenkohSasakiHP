@@ -10,7 +10,7 @@
                 <div class="carousel-item active">
                     <img src="{{ asset($modal_image[0]) }}">
                 </div>
-                @if (count($modal_images[$i]) > 2)
+                @if (count($modal_images[$i]) > 1)
                 @for($j = 1; $j <= count($modal_images[$i]) - 1; $j++)
                 <div class="carousel-item">
                     <img src="{{ asset($modal_image[$j]) }}">
@@ -18,7 +18,7 @@
                 @endfor
                 @endif
             </div>
-            @if (count($modal_images[$i]) > 2)
+            @if (count($modal_images[$i]) > 1)
             <a class="carousel-control-prev" href="#carouselExampleFade_{{ $i }}" role="button" data-slide="prev">
             </a>
             <a class="carousel-control-next" href="#carouselExampleFade_{{ $i }}" role="button" data-slide="next">
