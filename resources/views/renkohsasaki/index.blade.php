@@ -130,7 +130,7 @@
     text-align: center;
 }
 .carousel-item img {
-    max-height: 80vh;
+    max-height: 90vh;
     max-width: 100%;
     object-fit: cover;
 }
@@ -140,6 +140,15 @@
 .carousel-indicators li {
     background-color: #000;
     width: 15px;
+}
+/* スクロールバー */
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 50, .5);
+  border-radius: 10px;
+  box-shadow:0 0 0 1px rgba(255, 255, 255, .3);
 }
 </style>
 
