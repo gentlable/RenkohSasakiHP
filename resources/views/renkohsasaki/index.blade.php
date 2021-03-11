@@ -5,15 +5,16 @@
 <main>
     @foreach($modal_images as $i => $modal_image)
     <div class="section">
+        @if ($modal_image[0]['type'] === '1' )
         <div id="carouselExampleFade_{{ $i }}" class="carousel slide carousel-fade" data-interval="false">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="{{ asset($modal_image[0]) }}">
+                    <img src="{{ asset($modal_image[0]['path']) }}">
                 </div>
                 @if (count($modal_images[$i]) > 1)
                 @for($j = 1; $j <= count($modal_images[$i]) - 1; $j++)
                 <div class="carousel-item">
-                    <img src="{{ asset($modal_image[$j]) }}">
+                    <img src="{{ asset($modal_image[$j]['path']) }}">
                 </div>
                 @endfor
                 @endif
@@ -31,6 +32,11 @@
             </ol>
             @endif
         </div>
+        @elseif($modal_image[0]['type'] === '2')
+        <div class="video-wrapper">
+          <video src="{{ asset($modal_image[0]['path']) }}" controls></video>
+        </div>
+        @endif
     </div>
     @endforeach
 </main>

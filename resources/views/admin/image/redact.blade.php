@@ -41,9 +41,28 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">内容</span></label>
                         <div class="col-sm-9">
+                        @if($image->file_type === '1')
                         <img src="{{ asset($image_path) }}" style="width:300px">
+                        @elseif($image->file_type === '2')
+                        <video src="{{ asset($image_path) }}" style="width:300px" controls></video>
+                        @endif
                         </div>
                     </div>
+                    @if($errors->has('diff'))
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label"></label>
+                    </div>
+                    <div class="col-sm-9">
+                        <label style="color:red;" for="inputError">同じポジションに異なる種類のファイルがあります。ポジションを変えてください。</label><br>
+                    </div>
+                    @elseif($errors->has('duplicate'))
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label"></label>
+                    </div>
+                    <div class="col-sm-9">
+                        <label style="color:red;" for="inputError">同じポジションに既にファイルがあります。ポジションを変えてください。</label><br>
+                    </div>
+                    @endif
                     <input type="hidden" class="form-control" name="id" value="{{ $image->id }}">
                     </div>
                 </div>

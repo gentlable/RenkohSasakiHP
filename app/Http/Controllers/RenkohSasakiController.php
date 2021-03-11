@@ -23,15 +23,14 @@ class RenkohSasakiController extends Controller
                 $images = Image::where('position', $i)->where('display', 1)->orderBy('file_name', 'asc')->get();
                 foreach ($images as $image) {
                     $file_name = $image['file_name'];
-                    $file_path_for_list = "/images/$file_name";
-                    $file_paths_for_list[] = $file_path_for_list;
+                    $file_type = $image['file_type'];
+                    $file_paths_for_list[] = array('type'=>$file_type, 'path'=>"/images/$file_name");
                 }
             } else {
                 continue;
             }
             $modal_images[] = $file_paths_for_list;
         }
-
         return view("renkohsasaki.index", [
             'modal_images' => $modal_images,
             ]);
@@ -74,6 +73,7 @@ class RenkohSasakiController extends Controller
                 $images = Image::where('position', $i)->where('display', 1)->orderBy('file_name', 'asc')->get();
                 foreach ($images as $image) {
                     $file_name = $image['file_name'];
+                    $file_type = $image['file_type'];
                     $file_path_for_list = "/images/$file_name";
                     $file_paths_for_list[] = $file_path_for_list;
                 }
@@ -82,7 +82,6 @@ class RenkohSasakiController extends Controller
             }
             $modal_images[] = $file_paths_for_list;
         }
-
         $modal_images = array_values($modal_images);
 
         return view("test.test_index", [

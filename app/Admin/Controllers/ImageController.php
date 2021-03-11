@@ -41,14 +41,27 @@ class ImageController extends AdminController
         // ファイルを保存
         $request->file('image')->storeAs('images', $file_name);
 
+        $position = (int) $request->position;
+        $extension = $pathinfo['extension'];
+
         // ファイル種類を判別
-        if($pathinfo['extension'] == 'jpg') {
+        if($extension === 'jpg') {
             $file_type = config('const.file_type.image');
-        } else if($pathinfo['extension'] == 'mp4' || $pathinfo['extension'] == 'webm') {
+            // 同じポジションに違う種類のファイルがあった場合登録不可
+            if(Image::where('position', $position)->where('file_type', config('const.file_type.movie'))->exists()) {
+                return back()->withInput()->withErrors(['diff'=> 'ファイル種別エラー']);
+            }
+        } else if($extension === 'mp4' || $extension === 'webm') {
             $file_type = config('const.file_type.movie');
+            // 同じポジションにファイルがあった場合登録不可
+            if(Image::where('position', $position)->exists()) {
+                return back()->withInput()->withErrors(['duplicate'=> 'ポジション重複エラー']);
+            }
         } else {
-            return back()->withInput()->withErrors($validator);
+            // システムエラー
+            return back()->withInput()->withErrors(['system'=> 'システムエラー']);
         }
+
         // 保存したファイルをpublicへ移動
         \File::move(storage_path("app/images/$file_name"), public_path("/images/$file_name"));
         $image = new Image;
@@ -87,6 +100,26 @@ class ImageController extends AdminController
     public function doRedact(Request $request)
     {
         $image = Image::find($request->id);
+        $position = (int) $request->position;
+        $extension = pathinfo($image->file_name)['extension'];
+
+        // ファイル種類を判別
+        if($extension === 'jpg') {
+            $file_type = config('const.file_type.image');
+            // 同じポジションに違う種類のファイルがあった場合登録不可
+            if(Image::where('position', $position)->where('file_type', config('const.file_type.movie'))->exists()) {
+                return back()->withInput()->withErrors(['diff'=> 'ファイル種別エラー']);
+            }
+        } else if($extension === 'mp4' || $extension === 'webm') {
+            $file_type = config('const.file_type.movie');
+            // 同じポジションにファイルがあった場合登録不可
+            if(Image::where('position', $position)->exists()) {
+                return back()->withInput()->withErrors(['duplicate'=> 'ポジション重複エラー']);
+            }
+        } else {
+            // システムエラー
+            return back()->withInput()->withErrors(['system'=> 'システムエラー']);
+        }
 
         $image->redactImageData($request->all());
 
@@ -102,6 +135,30 @@ class ImageController extends AdminController
         $image->deleteImageDataFromDB();
 
        return redirect()->route('list');
+    }
+
+    // ファイルタイプチェック
+    private function checkFileType(int $position, string $extension) {
+
+        // ファイル種類を判別
+        if($extension === 'jpg') {
+            $file_type = config('const.file_type.image');
+            // 同じポジションに違う種類のファイルがあった場合登録不可
+            if(Image::where('position', $position)->where('file_type', config('const.file_type.movie'))->exists()) {
+                return back()->withInput()->withErrors(['diff'=> 'ファイル種別エラー']);
+            }
+        } else if($extension === 'mp4' || $extension === 'webm') {
+            $file_type = config('const.file_type.movie');
+            // 同じポジションにファイルがあった場合登録不可
+            if(Image::where('position', $position)->exists()) {
+                return back()->withInput()->withErrors(['duplicate'=> 'ポジション重複エラー']);
+            }
+        } else {
+            // システムエラー
+            return back()->withInput()->withErrors(['system'=> 'システムエラー']);
+        }
+
+        return $file_type;
     }
 
     // Image画面作ってる

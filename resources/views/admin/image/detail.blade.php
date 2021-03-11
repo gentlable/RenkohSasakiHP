@@ -27,7 +27,7 @@
                         <label class="col-sm-3 control-label" >内容</span></label>
                         @if($image->file_type === '1')
                         <img src="{{ asset($image_path) }}" style="width:300px">
-                        @elseif(($image->file_type === '2'))
+                        @elseif($image->file_type === '2')
                         <video src="{{ asset($image_path) }}" style="width:300px" controls></video>
                         @endif
                     </div>
