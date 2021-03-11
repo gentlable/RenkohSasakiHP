@@ -13,17 +13,20 @@ class Image extends Model
 
     protected $fillable = [
       'file_name',
+      'file_type',
       'position',
       'display',
     ];
 
-    // 画像登録
-    public function registerImageData($file_name, $param)
+    // ファイル登録
+    public function registerImageData($file_name, $file_type, $param)
     {
         // ファイル名
         $this->file_name     = $file_name;
+        // ファイル種類
+        $this->file_type     = $file_type;
         // 一覧表示
-        $this->display  = $param['display'];
+        $this->display       = $param['display'];
         // ポジション
         $this->position      = $param['position'];
         $this->save();
@@ -56,7 +59,7 @@ class Image extends Model
         $validator = Validator::make($validator_arr, [
           'file_name'  => 'unique:images,file_name',
           'file_exist'  => 'required',
-          'extension'  => 'starts_with:jpg',
+          'extension'  => 'starts_with:jpg,mp4,webm',
         ]);
 
         return $validator;

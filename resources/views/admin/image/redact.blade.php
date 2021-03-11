@@ -39,7 +39,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">画像</span></label>
+                        <label class="col-sm-2 control-label">内容</span></label>
                         <div class="col-sm-9">
                         <img src="{{ asset($image_path) }}" style="width:300px">
                         </div>

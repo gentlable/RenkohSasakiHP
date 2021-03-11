@@ -33,7 +33,6 @@ class ImageController extends AdminController
             $pathinfo = pathinfo($file_name);
             $validator_arr['extension'] = $pathinfo['extension'];
         }
-
         // バリデーション
         $validator = Image::validator($validator_arr);
         if ($validator->fails()) {
@@ -42,10 +41,18 @@ class ImageController extends AdminController
         // ファイルを保存
         $request->file('image')->storeAs('images', $file_name);
 
+        // ファイル種類を判別
+        if($pathinfo['extension'] == 'jpg') {
+            $file_type = config('const.file_type.image');
+        } else if($pathinfo['extension'] == 'mp4' || $pathinfo['extension'] == 'webm') {
+            $file_type = config('const.file_type.movie');
+        } else {
+            return back()->withInput()->withErrors($validator);
+        }
         // 保存したファイルをpublicへ移動
         \File::move(storage_path("app/images/$file_name"), public_path("/images/$file_name"));
         $image = new Image;
-        $id = $image->registerImageData($file_name, $request->except(['image']));
+        $id = $image->registerImageData($file_name, $file_type, $request->except(['image']));
 
         return redirect()->route('detail', ['id' => $id]);
     }
@@ -104,7 +111,7 @@ class ImageController extends AdminController
         
         $route = route('register');
         $grid->tools(function ($tools) use ($route) {
-            $tools->prepend("<a href='{$route}' class='btn btn-sm btn-success'>新規画像登録</a>");
+            $tools->prepend("<a href='{$route}' class='btn btn-sm btn-success'>新規ファイル登録</a>");
         });
 
         $grid->filter(function ($filter) {

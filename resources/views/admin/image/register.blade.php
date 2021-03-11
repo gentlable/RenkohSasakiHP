@@ -2,7 +2,7 @@
 
 @section('content')
 <div class='title container-fluid'>
-    <h3>新規画像登録</h3>
+    <h3>新規ファイル登録</h3>
     <div class="content">
         <form method="POST" class="form-horizontal" name="form" action="{{ route('doRegister') }}" enctype="multipart/form-data">
             @csrf
@@ -10,7 +10,7 @@
                 <div class="box-body">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h2 class="panel-title">新規画像情報入力</h2>
+                            <h2 class="panel-title">新規ファイル情報入力</h2>
                         </div>
                         <div class="form-group" style="margin-top:20px">
                             <label class="col-sm-2 control-label">表示可否</label>
@@ -33,7 +33,7 @@
                             </div>
                         </div>
                         <div class="form-group" style="margin-top:20px">
-                            <label class="col-sm-2 control-label">画像選択</label>
+                            <label class="col-sm-2 control-label">ファイル選択</label>
                             <div  class="col-sm-5">
                                 <input type="file" class="custom-file-input" name="image">
                             </div>
@@ -48,7 +48,7 @@
                         <div class="form-group">
                         <label class="col-sm-2 control-label"></label>
                         <div class="col-sm-5">
-                        <label class="control-label" style="color:red;" for="inputError">jpgファイルを選択してください。</label><br>
+                        <label class="control-label" style="color:red;" for="inputError">jpg, mp4またはwebmファイルを選択してください。</label><br>
                         </div>
                         @elseif($errors->has('file_name'))
                         <div class="form-group">
