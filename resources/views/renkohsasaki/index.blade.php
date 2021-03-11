@@ -34,7 +34,7 @@
         </div>
         @elseif($modal_image[0]['type'] === '2')
         <div class="video-wrapper">
-          <video src="{{ asset($modal_image[0]['path']) }}" controls></video>
+          <video class="video" src="{{ asset($modal_image[0]['path']) }}" controls></video>
         </div>
         @endif
     </div>
@@ -146,6 +146,9 @@
 .carousel-indicators li {
     background-color: #000;
     width: 15px;
+}
+.video {
+  max-width: 100%;
 }
 /* スクロールバー */
 ::-webkit-scrollbar {

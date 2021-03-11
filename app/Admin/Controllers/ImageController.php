@@ -106,15 +106,18 @@ class ImageController extends AdminController
         // ファイル種類を判別
         if($extension === 'jpg') {
             $file_type = config('const.file_type.image');
-            // 同じポジションに違う種類のファイルがあった場合登録不可
+            // 変更先のポジションに違う種類のファイルがあった場合登録不可
             if(Image::where('position', $position)->where('file_type', config('const.file_type.movie'))->exists()) {
                 return back()->withInput()->withErrors(['diff'=> 'ファイル種別エラー']);
             }
         } else if($extension === 'mp4' || $extension === 'webm') {
             $file_type = config('const.file_type.movie');
-            // 同じポジションにファイルがあった場合登録不可
-            if(Image::where('position', $position)->exists()) {
-                return back()->withInput()->withErrors(['duplicate'=> 'ポジション重複エラー']);
+            // ポジションに変更があった時
+            if($position !== $image->position) {
+                // 変更先のポジションにファイルがあった場合登録不可
+                if(Image::where('position', $position)->exists()) {
+                    return back()->withInput()->withErrors(['duplicate'=> 'ポジション重複エラー']);
+                }
             }
         } else {
             // システムエラー
